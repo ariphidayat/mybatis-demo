@@ -43,6 +43,9 @@ public class MybatisDemoApplication {
 			System.out.println("-------------------------------");
 			userMapper.search(null, "Jl. Tanah Abang III").forEach(System.out::println);
 
+            System.out.println("-------------------------------");
+            userMapper.deleteById(1);
+            userMapper.selectAll().forEach(System.out::println);
 		};
 	}
 }
@@ -53,6 +56,9 @@ interface UserMapper {
 	@Options(useGeneratedKeys = true)
 	@Insert("insert into users(name, address) values(#{name}, #{address})")
 	void insert(User user);
+
+    @Delete("delete from users where id = #{id}")
+    void deleteById(long id);
 
 	@Select("select * from users")
 	Collection<User> selectAll();
