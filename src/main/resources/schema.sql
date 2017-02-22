@@ -1,0 +1,7 @@
+DROP TABLE if EXISTS users;
+
+CREATE TABLE users (
+  id      BIGINT SERIAL NOT NULL,
+  name    VARCHAR(50)   NOT NULL,
+  address VARCHAR(225)  NOT NULL,
+)
