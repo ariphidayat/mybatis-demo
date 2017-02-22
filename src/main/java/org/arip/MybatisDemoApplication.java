@@ -3,10 +3,7 @@ package org.arip;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -39,6 +36,13 @@ public class MybatisDemoApplication {
 
 			System.out.println("-------------------------------");
 			userMapper.selectAll().forEach(System.out::println);
+
+			System.out.println("-------------------------------");
+			userMapper.search("Arip", null).forEach(System.out::println);
+
+			System.out.println("-------------------------------");
+			userMapper.search(null, "Jl. Tanah Abang III").forEach(System.out::println);
+
 		};
 	}
 }
@@ -52,6 +56,9 @@ interface UserMapper {
 
 	@Select("select * from users")
 	Collection<User> selectAll();
+
+	Collection<User> search(@Param("name") String name,
+							@Param("address") String address);
 }
 
 @Data
